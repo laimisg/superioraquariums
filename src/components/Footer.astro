@@ -1,0 +1,22 @@
+---
+import { site, nav } from '../data/site';
+---
+<footer class="ftr">
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <a class="logo" href="/">{site.name.split(' ')[0]}<small>{site.name.split(' ').slice(1).join(' ')}</small></a>
+        <p style="margin-top:1.5rem;max-width:22rem">Design, engineering and manufacturing of custom aquatic environments, delivered through a network of professional partners.</p>
+      </div>
+      <div><h4>Explore</h4><ul>{nav.slice(1, 6).map((n) => <li><a href={n.href}>{n.label}</a></li>)}</ul></div>
+      <div><h4>Company</h4><ul>
+        <li><a href="/for-resellers/">For Resellers</a></li><li><a href="/about/">About</a></li><li><a href="/commercial/">Commercial</a></li>
+        <li><a href="/residential/">Residential</a></li><li><a href="/resources/">Resources</a></li><li><a href="/faq/">FAQ</a></li></ul></div>
+      <div><h4>Contact</h4><ul>
+        <li class="ph">{site.phone}</li><li class="ph">{site.email}</li><li class="ph">{site.address}</li>
+        <li><a href="/contact/?type=project">Request a Consultation</a></li></ul></div>
+    </div>
+    <div class="fine"><span>© {new Date().getFullYear()} {site.name}. All rights reserved.</span><span>You are not buying an aquarium. You are commissioning a custom environment.</span></div>
+  </div>
+</footer>
+<div class="sticky"><a href="/contact/?type=project">Start a Project</a><a href="/for-resellers/">Become a Reseller</a></div>

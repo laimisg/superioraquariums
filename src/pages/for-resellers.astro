@@ -1,0 +1,38 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import SectionHead from '../components/SectionHead.astro';
+import Band from '../components/Band.astro';
+import { photos } from '../data/photos';
+import { site } from '../data/site';
+import { getCollection } from 'astro:content';
+const resellers = await getCollection('resellers');
+const who = ['Aquarium retailers', 'Specialty dealers', 'Interior designers', 'Architects', 'Contractors', 'Landscape designers', 'Hospitality designers', 'Animal care professionals', 'Commercial developers', 'Other qualified resellers'];
+const benefits = [
+  ['Custom Manufacturing', 'We manufacture highly customized systems according to project requirements.'],
+  ['Engineering Support', 'Help resellers develop practical solutions for challenging installations.'],
+  ['Design Collaboration', 'Work alongside designers, architects, contractors, and dealers.'],
+  ['Consistent Quality', 'Repeatable manufacturing standards and attention to detail.'],
+  ['Project Support', 'Provide technical assistance throughout the project.'],
+  ['White-Label / Dealer Relationships', 'Where appropriate, allow the reseller to remain the primary customer-facing relationship.'],
+];
+---
+<Base title="Reseller Program — Custom Aquarium Manufacturing Partner" description="Become an authorized reseller: a custom aquarium and terrarium manufacturing partner for dealers, designers, architects and contractors, with engineering and project support." image={photos.stand.src}>
+  <Hero short eyebrow="For Resellers" title="Built for Professionals." lead="A Manufacturing Partner You Can Trust." images={[photos.stand]}>
+    <a class="btn solid" href={site.resellerApplicationUrl}>Apply to Become a Reseller</a><a class="btn ghost" href="/contact/?type=reseller">Contact Our Sales Team</a>
+  </Hero>
+  <section class="section"><div class="wrap split top">
+    <div><span class="eyebrow rv">Who We Work With</span><h2 class="rv">The partner behind your project.</h2>
+      <p class="lead rv d1">We are a behind-the-scenes manufacturing partner that allows resellers to deliver projects they could not manufacture themselves.</p></div>
+    <ul class="tags" style="margin-top:0">{who.map((w) => <li>{w}</li>)}</ul>
+  </div></section>
+  <section class="section alt"><div class="wrap">
+    <SectionHead eyebrow="Reseller Benefits" title="What partnership looks like." />
+    <div class="grid c3">{benefits.map(([t, d]) => <div class="cell rv"><h3>{t}</h3><p>{d}</p></div>)}</div>
+  </div></section>
+  {resellers.length > 0 && <section class="section"><div class="wrap"><SectionHead eyebrow="Our Partners" title="Authorized resellers." />
+    <div class="grid c3">{resellers.map(({ data: r }) => <div class="cell"><h3>{r.name}</h3><p>{r.type} · {r.location}</p></div>)}</div></div></section>}
+  <Band image={photos.floor.src} alt={photos.floor.alt} title="Looking for a Manufacturing Partner?" lead="Bring us your most challenging project. Our team can help transform the concept into a professionally engineered and manufactured system.">
+    <a class="btn solid" href={site.resellerApplicationUrl}>Apply to Become a Reseller</a><a class="btn ghost" href="/contact/?type=reseller">Contact Our Sales Team</a>
+  </Band>
+</Base>

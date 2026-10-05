@@ -1,0 +1,14 @@
+---
+import Photo from './Photo.astro';
+interface Props { title: string; lead?: string; image?: ImageMetadata; alt?: string; eyebrow?: string; }
+const { title, lead, image, alt = '', eyebrow } = Astro.props;
+---
+<section class={image ? 'band' : 'band cta-plain'}>
+  {image && <div class="bg"><div data-parallax style="position:absolute;inset:0;transform:scale(1.1)"><Photo src={image} alt={alt} widths={[800, 1600, 2400]} /></div></div>}
+  <div class="wrap">
+    {eyebrow && <span class="eyebrow rv">{eyebrow}</span>}
+    <h2 class="rv">{title}</h2>
+    {lead && <p class="lead rv d1">{lead}</p>}
+    <div class="btn-row rv d2"><slot /></div>
+  </div>
+</section>

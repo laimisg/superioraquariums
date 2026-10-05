@@ -1,0 +1,9 @@
+---
+import ProductPage from '../components/ProductPage.astro';
+import { photos } from '../data/photos';
+---
+<ProductPage seo={{ title: 'Custom Aquarium Manufacturer — Luxury & Commercial Aquariums', description: 'Custom aquariums engineered and manufactured for residential and commercial spaces: freshwater, saltwater, reef and planted systems with integrated cabinetry and filtration.' }}
+  hero={{ eyebrow: 'Custom Aquariums', title: 'Aquariums, Engineered Around the Space.', lead: 'Freshwater, saltwater, reef, planted and specialty aquariums — designed and manufactured as complete systems.', image: photos.display }}
+  intro={{ title: 'A system, not a tank.', body: 'Each aquarium is developed together with its stand, plumbing, filtration, lighting and service access, so the finished environment performs as well as it looks.' }}
+  offerings={[['Freshwater & planted', 'Systems built around the needs of the plants and animals.'], ['Saltwater & reef', 'Engineered circulation, overflow and life support.'], ['Large-format & commercial', 'Complex projects coordinated with architects and contractors.'], ['Cabinets & stands', 'Furniture-grade cabinetry engineered for each aquarium.'], ['Specialty displays', '[SPECIALTY CAPABILITIES]']]}
+  image={photos.stand} />

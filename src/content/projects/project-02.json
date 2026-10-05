@@ -1,0 +1,13 @@
+{
+  "title": "[PROJECT NAME #2]",
+  "sample": true,
+  "type": "Aquarium with Integrated Stand & Sump",
+  "categories": ["Aquariums", "Reef Systems"],
+  "featured": true,
+  "order": 2,
+  "image": "../../assets/photos/white-stand-sump.jpg",
+  "imageAlt": "Low-iron glass aquarium on a white custom stand with an integrated glass sump system below",
+  "summary": "[PROJECT DESCRIPTION] A custom stand engineered around an integrated multi-chamber sump.",
+  "highlights": ["[TECHNICAL HIGHLIGHT]", "[TECHNICAL HIGHLIGHT]"],
+  "specs": { "Project Type": "[XX]", "Dimensions": "[XX]", "Volume": "[XX] gallons", "Filtration": "[XX]" }
+}

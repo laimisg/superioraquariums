@@ -1,0 +1,42 @@
+---
+import Base from '../../layouts/Base.astro';
+import Hero from '../../components/Hero.astro';
+import Photo from '../../components/Photo.astro';
+import Band from '../../components/Band.astro';
+import { getCollection } from 'astro:content';
+export async function getStaticPaths() {
+  const all = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+  return all.map((p, i) => ({ params: { slug: p.id }, props: { p, next: all[(i + 1) % all.length] } }));
+}
+const { p, next } = Astro.props; const d = p.data;
+const sections = [['Challenge', d.challenge], ['Design', d.design], ['Engineering', d.engineering], ['Manufacturing', d.manufacturing], ['Installation', d.installation], ['Solution', d.solution], ['Result', d.result]];
+const schema = { '@context': 'https://schema.org', '@type': 'CreativeWork', name: d.title, description: d.summary };
+---
+<Base title={`${d.title} — ${d.type}`} description={d.summary.replace(/\[[^\]]*\]\s*/g, '').trim() || `${d.type} case study: challenge, design, engineering, manufacturing and result.`} image={d.image} schema={schema}>
+  <Hero short eyebrow={d.type} title={d.title} images={[{ src: d.image, alt: d.imageAlt }]}>
+    <a class="btn solid" href="/contact/?type=project">Start a Project</a>
+  </Hero>
+  <section class="section"><div class="wrap split top">
+    <div>
+      {d.sample && <p class="notice" style="margin-top:0">Sample entry — replace this content with real project information in <code>src/content/projects</code>.</p>}
+      <h2 class="rv" style="margin-top:2rem">Project overview</h2>
+      <p class="lead rv">{d.summary}</p>
+      {d.highlights.length > 0 && <><h3>Technical highlights</h3><ul class="ticks">{d.highlights.map((h) => <li>{h}</li>)}</ul></>}
+    </div>
+    <div>
+      <h3>Specifications</h3>
+      <dl class="facts">
+        <dt>Size</dt><dd class="ph">{d.size}</dd>
+        {d.location && <><dt>Location</dt><dd>{d.location}</dd></>}
+        {Object.entries(d.specs).map(([k, v]) => <><dt>{k}</dt><dd class="ph">{v}</dd></>)}
+      </dl>
+    </div>
+  </div></section>
+  <section class="section alt"><div class="wrap"><div class="grid c2">
+    {sections.map(([t, b], i) => <div class="cell rv"><span class="n">{String(i + 1).padStart(2, '0')}</span><h3>{t}</h3><p class={String(b).startsWith('[') ? 'ph' : ''}>{b}</p></div>)}
+  </div></div></section>
+  {d.gallery.length > 0 && <section class="section"><div class="wrap cards">{d.gallery.map((g) => <div class="photo"><Photo src={g.image} alt={g.alt} widths={[480, 800, 1200]} sizes="33vw" /></div>)}</div></section>}
+  <Band image={next.data.image} alt={next.data.imageAlt} eyebrow="Next project" title={next.data.title}>
+    <a class="btn solid" href={`/our-work/${next.id}/`}>View case study</a><a class="btn ghost" href="/our-work/">All projects</a>
+  </Band>
+</Base>

@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from './Hero.astro';
+import Photo from './Photo.astro';
+import SectionHead from './SectionHead.astro';
+import Band from './Band.astro';
+interface Props { seo: { title: string; description: string }; hero: { eyebrow: string; title: string; lead: string; image: { src: ImageMetadata; alt: string } }; intro: { title: string; body: string }; offerings: [string, string][]; image: { src: ImageMetadata; alt: string }; extra?: { id: string; title: string; body: string }; }
+const { seo, hero, intro, offerings, image, extra } = Astro.props;
+---
+<Base title={seo.title} description={seo.description} image={hero.image.src}>
+  <Hero short eyebrow={hero.eyebrow} title={hero.title} lead={hero.lead} images={[hero.image]}>
+    <a class="btn solid" href="/contact/?type=project">Start a Project</a><a class="btn ghost" href="/our-work/">Explore Our Work</a>
+  </Hero>
+  <section class="section"><div class="wrap split">
+    <div><h2 class="rv">{intro.title}</h2><p class="lead rv d1">{intro.body}</p>
+      <ul class="ticks rv d2">{offerings.map(([t, d]) => <li><strong style="color:var(--warm);font-weight:500">{t}.</strong> {d}</li>)}</ul></div>
+    <div class="photo reveal-img" style="aspect-ratio:4/5"><Photo src={image.src} alt={image.alt} sizes="(max-width:860px) 100vw,50vw" widths={[500, 800, 1100]} /></div>
+  </div></section>
+  {extra && <section class="section alt" id={extra.id}><div class="wrap"><SectionHead title={extra.title} lead={extra.body} /></div></section>}
+  <Band title="Commission a custom environment." lead="Share your space, your requirements and your timeline. Drawings and photos are welcome.">
+    <a class="btn solid" href="/contact/?type=project">Request a Consultation</a><a class="btn ghost" href="/for-resellers/">Become a Reseller</a>
+  </Band>
+</Base>

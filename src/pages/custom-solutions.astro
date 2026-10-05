@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import SectionHead from '../components/SectionHead.astro';
+import Process from '../components/Process.astro';
+import Band from '../components/Band.astro';
+import { photos } from '../data/photos';
+import { materials, technical } from '../data/site';
+---
+<Base title="Custom Solutions — Materials, Engineering & Manufacturing Process" description="How custom aquariums and aquatic environments are engineered and manufactured: materials, structural systems, plumbing, filtration, lighting, environmental control and our seven-step process." image={photos.production.src}>
+  <Hero short eyebrow="Custom Solutions" title="Design. Engineering. Manufacturing." lead="One accountable team from concept to delivery." images={[photos.production]}>
+    <a class="btn solid" href="/contact/?type=project">Start a Project</a>
+  </Hero>
+  <section class="section" id="materials"><div class="wrap">
+    <SectionHead eyebrow="Materials & Manufacturing" title="Every component, specified for the project." />
+    <div class="grid c3">{materials.map(([t, d]) => <div class="cell rv"><h3>{t}</h3><p>{d}</p></div>)}</div>
+  </div></section>
+  <section class="section alt" id="process"><div class="wrap">
+    <SectionHead eyebrow="The Manufacturing Process" title="Seven steps, one standard." /><Process />
+  </div></section>
+  <section class="section" id="technical"><div class="wrap">
+    <SectionHead eyebrow="Technical Expertise" title="More than the visible glass." lead="Architects, engineers, contractors, designers, dealers and professional installers need answers beyond appearance. These are the topics we work through on every project." />
+    <ul class="tags">{technical.map((t) => <li>{t}</li>)}</ul>
+  </div></section>
+  <Band image={photos.workshop.src} alt={photos.workshop.alt} title="Bring us the difficult project." lead="Our team can help transform the concept into a professionally engineered and manufactured system.">
+    <a class="btn solid" href="/contact/?type=project">Request a Consultation</a>
+  </Band>
+</Base>

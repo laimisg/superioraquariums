@@ -1,0 +1,13 @@
+{
+  "title": "[PROJECT NAME #3]",
+  "sample": true,
+  "type": "Large-Format Glass Aquarium",
+  "categories": ["Aquariums", "Commercial", "Freshwater"],
+  "featured": true,
+  "order": 3,
+  "image": "../../assets/photos/glass-tank-workshop.png",
+  "imageAlt": "Large rimless glass aquarium with black trim on a steel fabrication frame in the workshop",
+  "summary": "[PROJECT DESCRIPTION] A precision-built glass system photographed during fabrication.",
+  "highlights": ["[TECHNICAL HIGHLIGHT]", "[TECHNICAL HIGHLIGHT]"],
+  "specs": { "Dimensions": "[XX]", "Volume": "[XX] gallons", "Materials": "[XX]" }
+}

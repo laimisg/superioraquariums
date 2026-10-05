@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionHead from '../components/SectionHead.astro';
+import { faqs } from '../data/site';
+const schema = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) };
+---
+<Base title="FAQ — Custom Aquarium Manufacturing & Reseller Questions" description="Answers about custom aquariums, terrariums and paludariums, reseller applications, drawings, installation, service area and project timelines." schema={schema}>
+  <section class="section" style="padding-top:11rem"><div class="wrap" style="max-width:62rem">
+    <SectionHead eyebrow="FAQ" title="Frequently asked questions" />
+    {faqs.map(([q, a]) => <details><summary>{q}</summary><p>{a}</p></details>)}
+  </div></section>
+</Base>

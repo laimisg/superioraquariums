@@ -1,0 +1,21 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import SectionHead from '../components/SectionHead.astro';
+import Band from '../components/Band.astro';
+import { photos } from '../data/photos';
+const apps = ['Restaurants', 'Hotels', 'Resorts', 'Corporate offices', 'Retail', 'Medical facilities', 'Entertainment venues', 'Public spaces', 'Museums', 'Luxury developments'];
+const emph = ['Design coordination', 'Project management', 'Engineering', 'Service access', 'Durability', 'Maintenance considerations', 'Coordination with contractors', 'Integration with architecture'];
+---
+<Base title="Commercial Aquariums — Hospitality, Corporate & Retail" description="Commercial aquarium manufacturing for restaurants, hotels, corporate offices, retail and public spaces: engineering, project coordination, service access and architectural integration." image={photos.workshop.src}>
+  <Hero short eyebrow="Commercial Projects" title="Aquatic Environments Built for Commercial Spaces" images={[photos.workshop]}>
+    <a class="btn solid" href="/contact/?type=project">Start a Project</a><a class="btn ghost" href="/our-work/#Commercial">Commercial Portfolio</a>
+  </Hero>
+  <section class="section"><div class="wrap split top">
+    <div><span class="eyebrow rv">Applications</span><h2 class="rv">Where our systems live.</h2><ul class="tags">{apps.map((a) => <li>{a}</li>)}</ul></div>
+    <div><span class="eyebrow rv">What we emphasize</span><ul class="ticks">{emph.map((e) => <li>{e}</li>)}</ul></div>
+  </div></section>
+  <Band title="Commercial project in planning?" lead="Share drawings, dimensions and schedule — we will coordinate with your design and construction team.">
+    <a class="btn solid" href="/contact/?type=project">Request a Consultation</a>
+  </Band>
+</Base>

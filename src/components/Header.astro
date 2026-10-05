@@ -1,0 +1,16 @@
+---
+import { nav, site } from '../data/site';
+const path = Astro.url.pathname;
+const active = (h: string) => (h === '/' ? path === '/' : path.startsWith(h));
+---
+<a class="skip" href="#main">Skip to content</a>
+<header class="hdr">
+  <div class="wrap">
+    <a class="logo" href="/" aria-label={`${site.name} home`}>{site.name.split(' ')[0]}<small>{site.name.split(' ').slice(1).join(' ')}</small></a>
+    <button class="burger" aria-expanded="false" aria-controls="nav" aria-label="Menu"><span></span><span></span></button>
+    <nav class="nav" id="nav" aria-label="Primary">
+      {nav.map((n) => <a href={n.href} class={n.label === 'Home' ? 'home' : ''} aria-current={active(n.href) ? 'page' : undefined}>{n.label}</a>)}
+      <a class="btn" href="/contact/?type=project">Start a Project</a>
+    </nav>
+  </div>
+</header>

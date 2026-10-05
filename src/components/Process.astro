@@ -1,0 +1,6 @@
+---
+import { processSteps } from '../data/site';
+---
+<ol class="steps">
+  {processSteps.map(([t, d], i) => <li class="rv"><span class="num">{String(i + 1).padStart(2, '0')}</span><h3>{t}</h3><p>{d}</p></li>)}
+</ol>

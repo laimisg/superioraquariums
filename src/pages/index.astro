@@ -1,0 +1,123 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Photo from '../components/Photo.astro';
+import SectionHead from '../components/SectionHead.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import Stats from '../components/Stats.astro';
+import Process from '../components/Process.astro';
+import Testimonials from '../components/Testimonials.astro';
+import Band from '../components/Band.astro';
+import { photos } from '../data/photos';
+import { getCollection } from 'astro:content';
+import { site } from '../data/site';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const featured = projects.filter((p) => p.data.featured);
+const attributes = ['Structural integrity', 'Materials', 'Water management', 'Filtration', 'Lighting', 'Plumbing', 'Cabinetry', 'Accessibility', 'Serviceability', 'Aesthetics'];
+const builds = [
+  ['Custom Aquariums', 'Custom freshwater, saltwater, reef, planted, and specialty aquariums.', '/aquariums/', photos.display],
+  ['Custom Terrariums', 'Purpose-built environments for reptiles, amphibians, plants, tropical environments, and specialty displays.', '/terrariums/', photos.workshop],
+  ['Paludariums & Vivariums', 'Integrated land-and-water environments designed around the needs of the ecosystem and the surrounding architecture.', '/terrariums/#paludariums', photos.production],
+  ['Custom Water Features', 'Specialty water installations, architectural water features, fountains, displays, and integrated aquatic environments.', '/water-features/', photos.floor],
+  ['Custom Filtration & Life Support', 'Advanced filtration, circulation, water management, and equipment systems designed specifically for the installation.', '/custom-solutions/#materials', photos.stand],
+  ['Custom Cabinets & Stands', 'Furniture-grade cabinetry and structural systems engineered specifically for each aquarium.', '/custom-solutions/#materials', photos.display],
+] as const;
+const benefits = [
+  ['Custom Manufacturing', 'We manufacture highly customized systems according to project requirements.'],
+  ['Engineering Support', 'Help resellers develop practical solutions for challenging installations.'],
+  ['Design Collaboration', 'Work alongside designers, architects, contractors, and dealers.'],
+  ['Consistent Quality', 'Repeatable manufacturing standards and attention to detail.'],
+  ['Project Support', 'Provide technical assistance throughout the project.'],
+  ['White-Label / Dealer Relationships', 'Where appropriate, allow the reseller to remain the primary customer-facing relationship.'],
+];
+const schema = { '@context': 'https://schema.org', '@type': 'WebSite', name: site.name, url: site.domain };
+---
+<Base title="Custom Aquarium & Terrarium Manufacturer" description="Custom aquarium manufacturer designing and engineering luxury aquariums, terrariums, paludariums and aquatic environments for residential and commercial spaces, through authorized resellers." image={photos.display.src} schema={schema}>
+  <Hero eyebrow="Custom Aquariums, Terrariums & Aquatic Environments" title="Built Without Compromise."
+    lead="Engineered and crafted for extraordinary spaces, our custom systems combine exceptional materials, precision manufacturing, and decades of experience."
+    images={[photos.display, photos.stand]}>
+    <a class="btn solid" href="/our-work/">Explore Our Work</a>
+    <a class="btn ghost" href="/for-resellers/">Become a Reseller</a>
+  </Hero>
+
+  <section class="section">
+    <div class="wrap split">
+      <div>
+        <span class="eyebrow rv">Craftsmanship</span>
+        <h2 class="rv">Where Engineering Meets Craftsmanship</h2>
+        <p class="lead rv d1">You are not buying an aquarium. You are commissioning a custom environment — designed, engineered and manufactured as one system, from sophisticated residential installations to large commercial projects.</p>
+        <ul class="tags rv d2">{attributes.map((a) => <li>{a}</li>)}</ul>
+        <div class="btn-row"><a class="link" href="/custom-solutions/">Our approach</a></div>
+      </div>
+      <div class="photo reveal-img" style="aspect-ratio:4/5"><Photo src={photos.workshop.src} alt={photos.workshop.alt} sizes="(max-width:860px) 100vw,50vw" widths={[500, 800, 1100]} /></div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="wrap">
+      <SectionHead eyebrow="What We Build" title="Environments, engineered end to end." />
+      <div class="cards">
+        {builds.map(([t, d, h, im]) => (
+          <a class="card rv" href={h}><Photo src={im.src} alt={im.alt} sizes="(max-width:620px) 100vw,(max-width:980px) 50vw,33vw" widths={[480, 800, 1200]} /><div class="cap"><h3>{t}</h3><p>{d}</p></div></a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <SectionHead eyebrow="Custom Projects" title="No Two Projects Are the Same"
+        lead="Every environment presents different requirements. Our team works with designers, architects, contractors, resellers, and clients to develop solutions around the space, the animals or plants, the desired aesthetic, and the technical requirements of the installation." />
+      {featured.map((p) => (
+        <article class="showcase">
+          <a class="photo reveal-img" href={`/our-work/${p.id}/`}><Photo src={p.data.image} alt={p.data.imageAlt} sizes="(max-width:860px) 100vw,58vw" widths={[600, 1000, 1500]} /></a>
+          <div class="rv">
+            <span class="eyebrow">{p.data.type}{p.data.sample ? ' · Sample entry' : ''}</span>
+            <h3>{p.data.title}</h3>
+            <dl class="facts"><dt>Size</dt><dd class="ph">{p.data.size}</dd>{p.data.location && <><dt>Location</dt><dd>{p.data.location}</dd></>}</dl>
+            <p>{p.data.summary}</p>
+            <ul class="ticks">{p.data.highlights.slice(0, 3).map((h) => <li>{h}</li>)}</ul>
+            <a class="link" href={`/our-work/${p.id}/`}>View case study</a>
+          </div>
+        </article>
+      ))}
+      <div class="center"><a class="btn" href="/our-work/">Explore Our Work</a></div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="wrap">
+      <div class="split top">
+        <div>
+          <span class="eyebrow rv">Built for Professionals</span>
+          <h2 class="rv">A Manufacturing Partner You Can Trust</h2>
+          <p class="lead rv d1">We work through aquarium retailers, specialty dealers, interior designers, architects, contractors, landscape designers, hospitality designers, animal care professionals, commercial developers, and other qualified resellers — a behind-the-scenes manufacturing partner that lets you deliver projects you could not manufacture yourself.</p>
+          <div class="btn-row"><a class="btn solid" href={site.resellerApplicationUrl}>Apply to Become a Reseller</a><a class="btn ghost" href="/for-resellers/">The Reseller Program</a></div>
+        </div>
+        <div class="grid c2">{benefits.map(([t, d]) => <div class="cell rv"><h3>{t}</h3><p>{d}</p></div>)}</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <SectionHead eyebrow="Proven Experience" title="Experience You Can Verify" lead="Years in business, projects delivered and partners served — figures to be supplied by the company." />
+      <Stats />
+      <div style="margin-top:6rem"><Testimonials /></div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="wrap">
+      <SectionHead eyebrow="The Process" title="From first conversation to long-term support" />
+      <Process />
+    </div>
+  </section>
+
+  <Band image={photos.floor.src} alt={photos.floor.alt} title="Your Project. Our Expertise."
+    lead="From a sophisticated residential aquarium to a highly engineered commercial installation, we build custom aquatic environments designed to perform beautifully for years to come.">
+    <a class="btn solid" href="/contact/?type=project">Start a Project</a>
+    <a class="btn ghost" href="/for-resellers/">Become a Reseller</a>
+  </Band>
+</Base>

@@ -1,0 +1,16 @@
+---
+import Base from '../../layouts/Base.astro';
+import SectionHead from '../../components/SectionHead.astro';
+import { getCollection } from 'astro:content';
+const posts = (await getCollection('posts')).filter((p) => !p.data.draft).sort((a, b) => +b.data.date - +a.data.date);
+const links = [['Materials & Manufacturing', '/custom-solutions/#materials'], ['Manufacturing Process', '/custom-solutions/#process'], ['Technical Expertise', '/custom-solutions/#technical'], ['Frequently Asked Questions', '/faq/'], ['Commercial Projects', '/commercial/'], ['Residential Projects', '/residential/']];
+---
+<Base title="Resources — Guides, Technical Information & Articles" description="Technical information, manufacturing guides and articles on custom aquariums, terrariums and aquatic environments.">
+  <section class="section" style="padding-top:11rem"><div class="wrap">
+    <SectionHead eyebrow="Resources" title="Information for professionals and clients." />
+    <div class="grid c3">{links.map(([t, h]) => <a class="cell" href={h} style="text-decoration:none"><h3>{t}</h3></a>)}</div>
+    <h2 style="margin-top:6rem">Articles</h2>
+    {posts.length === 0 ? <p class="empty">Articles will appear here. Add Markdown files to <code>src/content/posts</code>.</p> :
+      <div class="grid c2">{posts.map((p) => <a class="cell" href={`/resources/${p.id}/`} style="text-decoration:none"><span class="eyebrow">{p.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}</span><h3>{p.data.title}</h3><p>{p.data.description}</p></a>)}</div>}
+  </div></section>
+</Base>

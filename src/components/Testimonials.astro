@@ -1,0 +1,12 @@
+---
+import { getCollection } from 'astro:content';
+const items = await getCollection('testimonials');
+---
+<div class="grid c2" style="background:none;border:0;gap:3rem 4rem">
+  {items.map(({ data: t }) => (
+    <figure class="tcard rv" style="margin:0">
+      <blockquote class={t.placeholder ? 'ph' : ''}>“{t.quote}”</blockquote>
+      <cite>{t.name} — {t.position}, {t.company}{t.project && <><br />Project: {t.project}</>}</cite>
+    </figure>
+  ))}
+</div>

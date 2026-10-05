@@ -1,0 +1,12 @@
+{
+  "title": "[PROJECT NAME #5]",
+  "sample": true,
+  "type": "Multi-Tank Production Run",
+  "categories": ["Aquariums", "Retail"],
+  "order": 5,
+  "image": "../../assets/photos/glass-production.jpg",
+  "imageAlt": "Several glass aquariums at various stages of production in a manufacturing facility",
+  "summary": "[PROJECT DESCRIPTION] Multiple systems manufactured and inspected in a controlled production environment.",
+  "highlights": ["[TECHNICAL HIGHLIGHT]", "[TECHNICAL HIGHLIGHT]"],
+  "specs": { "Quantity": "[XX]", "Dimensions": "[XX]" }
+}

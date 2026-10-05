@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import SectionHead from '../components/SectionHead.astro';
+import Stats from '../components/Stats.astro';
+import Testimonials from '../components/Testimonials.astro';
+import Band from '../components/Band.astro';
+import { photos } from '../data/photos';
+const focus = ['Years of experience', 'Manufacturing expertise', 'Technical knowledge', 'Craftsmanship', 'Industry knowledge', 'Complex project experience', 'Customer relationships', 'Reseller relationships', 'Quality standards'];
+const timeline = [['[YEAR]', '[MILESTONE — founding]'], ['[YEAR]', '[MILESTONE — facility / capability expansion]'], ['[YEAR]', '[MILESTONE — notable project]'], ['[YEAR]', '[MILESTONE — reseller network growth]'], ['[YEAR]', '[MILESTONE]']];
+---
+<Base title="About — Custom Aquarium Manufacturing Experience" description="A manufacturer of custom aquatic environments built on engineering expertise, craftsmanship and long-standing relationships with professional resellers." image={photos.production.src}>
+  <Hero short eyebrow="About" title="Experience You Can See. Quality You Can Trust." images={[photos.production]}>
+    <a class="btn solid" href="/contact/">Contact Our Team</a>
+  </Hero>
+  <section class="section"><div class="wrap split top">
+    <div><h2 class="rv">Design, engineering, manufacturing and craftsmanship.</h2>
+      <p class="lead rv d1">[COMPANY STORY — a short, factual account of who you are, how long you have been building, and what you stand for.]</p></div>
+    <ul class="ticks">{focus.map((f) => <li>{f}</li>)}</ul>
+  </div></section>
+  <section class="section alt"><div class="wrap">
+    <SectionHead eyebrow="Proven Experience" title="The record." /><Stats />
+    <div style="margin-top:6rem"><SectionHead eyebrow="Timeline" title="Milestones" />
+      <div class="timeline">{timeline.map(([y, t]) => <div class="ev rv"><span class="yr ph">{y}</span><p class="ph">{t}</p></div>)}</div></div>
+  </div></section>
+  <section class="section"><div class="wrap"><SectionHead eyebrow="References" title="In their words." /><Testimonials />
+    <p class="ph" style="margin-top:3rem">[REFERENCE #1] · [REFERENCE #2] · [REFERENCE #3] · industries served · geographic reach</p></div></section>
+  <Band title="Let's Build Something Extraordinary" ><a class="btn solid" href="/contact/?type=project">Start a Project</a></Band>
+</Base>

@@ -1,0 +1,11 @@
+---
+import Photo from './Photo.astro';
+import type { CollectionEntry } from 'astro:content';
+interface Props { project: CollectionEntry<'projects'>; }
+const { project: p } = Astro.props; const d = p.data;
+---
+<a class="card rv" href={`/our-work/${p.id}/`} data-card data-cats={d.categories.join('|')}>
+  {d.sample && <span class="sample">Sample entry</span>}
+  <Photo src={d.image} alt={d.imageAlt} sizes="(max-width:620px) 100vw,(max-width:980px) 50vw,33vw" widths={[480, 800, 1200]} />
+  <div class="cap"><span class="meta">{d.type}</span><h3>{d.title}</h3><p>{d.categories.slice(0, 3).join(' · ')}</p></div>
+</a>

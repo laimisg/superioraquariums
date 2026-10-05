@@ -1,0 +1,12 @@
+{
+  "title": "[PROJECT NAME #4]",
+  "sample": true,
+  "type": "Oversized Low-Profile System",
+  "categories": ["Aquariums", "Commercial"],
+  "order": 4,
+  "image": "../../assets/photos/fabrication-floor.jpg",
+  "imageAlt": "Long low-profile glass aquarium with black steel frame on a wooden shipping pallet on the fabrication floor",
+  "summary": "[PROJECT DESCRIPTION] A long-format system on a shipping pallet, prepared for delivery.",
+  "highlights": ["[TECHNICAL HIGHLIGHT]", "[TECHNICAL HIGHLIGHT]"],
+  "specs": { "Dimensions": "[XX]", "Volume": "[XX] gallons" }
+}

@@ -1,0 +1,15 @@
+{
+  "title": "[PROJECT NAME #1]",
+  "sample": true,
+  "type": "Custom Display Aquarium",
+  "categories": ["Aquariums", "Residential"],
+  "featured": true,
+  "order": 1,
+  "image": "../../assets/photos/display-black-cabinet.webp",
+  "imageAlt": "Large rimless display aquarium on a black furniture-grade cabinet with blue lighting",
+  "summary": "[PROJECT DESCRIPTION] A large-format display aquarium paired with a matching furniture-grade cabinet.",
+  "highlights": ["[TECHNICAL HIGHLIGHT]", "[TECHNICAL HIGHLIGHT]", "[TECHNICAL HIGHLIGHT]"],
+  "challenge": "[CHALLENGE]",
+  "solution": "[SOLUTION]",
+  "specs": { "Project Type": "[XX]", "Dimensions": "[XX]", "Volume": "[XX] gallons", "Materials": "[XX]", "Filtration": "[XX]", "Special Features": "[XX]" }
+}

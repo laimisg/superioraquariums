@@ -1,0 +1,16 @@
+{
+  "title": "Project name",
+  "type": "Commercial Reef Aquarium",
+  "categories": ["Commercial", "Restaurants", "Reef Systems"],
+  "size": "[XX]",
+  "location": "City, Region (optional)",
+  "featured": false,
+  "order": 100,
+  "image": "../../assets/photos/your-image.jpg",
+  "imageAlt": "Describe the image for screen readers and SEO",
+  "gallery": [],
+  "summary": "Short description.",
+  "highlights": [],
+  "challenge": "", "design": "", "engineering": "", "manufacturing": "", "installation": "", "solution": "", "result": "",
+  "specs": { "Dimensions": "", "Volume": "", "Materials": "", "Filtration": "", "Special Features": "" }
+}

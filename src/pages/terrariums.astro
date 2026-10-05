@@ -1,0 +1,9 @@
+---
+import ProductPage from '../components/ProductPage.astro';
+import { photos } from '../data/photos';
+---
+<ProductPage seo={{ title: 'Custom Terrariums, Vivariums & Paludariums', description: 'Purpose-built custom terrariums, vivariums and paludariums for reptiles, amphibians, plants and specialty displays, integrated with architecture.' }}
+  hero={{ eyebrow: 'Terrariums, Vivariums & Paludariums', title: 'Living Environments, Purpose-Built.', lead: 'Environments for reptiles, amphibians, plants and tropical displays — designed around the needs of the ecosystem.', image: photos.workshop }}
+  intro={{ title: 'Designed around the ecosystem.', body: 'Temperature, humidity, ventilation and access are engineered into the enclosure from the start, then finished to suit the architecture around it.' }}
+  offerings={[['Custom terrariums', 'Tropical environments and specialty displays.'], ['Vivariums', 'Purpose-built habitats for reptiles and amphibians.'], ['Paludariums', 'Integrated land-and-water environments.'], ['Environmental control', 'Temperature, humidity and ventilation. [CAPABILITY DETAILS]']]}
+  image={photos.production} extra={{ id: 'paludariums', title: 'Paludariums & Vivariums', body: 'Integrated land-and-water environments designed around the needs of the ecosystem and the surrounding architecture.' }} />

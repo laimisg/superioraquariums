@@ -1,0 +1,9 @@
+---
+import ProductPage from '../components/ProductPage.astro';
+import { photos } from '../data/photos';
+---
+<ProductPage seo={{ title: 'Custom Water Features & Architectural Aquatic Displays', description: 'Custom water features, fountains and integrated aquatic displays engineered for architectural and commercial spaces.' }}
+  hero={{ eyebrow: 'Custom Water Features', title: 'Water, Designed Into the Architecture.', lead: 'Specialty water installations, architectural features, fountains and integrated aquatic displays.', image: photos.floor }}
+  intro={{ title: 'Engineered for the building.', body: 'Structure, drainage, circulation and service access are resolved with your architect and contractor before fabrication begins.' }}
+  offerings={[['Architectural water features', '[CAPABILITY DETAILS]'], ['Fountains & displays', '[CAPABILITY DETAILS]'], ['Integrated aquatic environments', 'Water and life support planned as one system.']]}
+  image={photos.workshop} />

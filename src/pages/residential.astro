@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import Band from '../components/Band.astro';
+import Photo from '../components/Photo.astro';
+import { photos } from '../data/photos';
+const kinds = ['Living room aquariums', 'Built-in aquariums', 'Wall installations', 'Room dividers', 'Reef aquariums', 'Freshwater aquariums', 'Planted systems', 'Luxury terrariums', 'Integrated cabinetry'];
+---
+<Base title="Luxury Residential Aquariums & Terrariums" description="Luxury residential aquariums and terrariums: built-in, wall and room-divider installations with integrated cabinetry, designed around your space." image={photos.display.src}>
+  <Hero short eyebrow="Residential Projects" title="Designed Around Your Space" images={[photos.display]}>
+    <a class="btn solid" href="/contact/?type=project">Start a Project</a>
+  </Hero>
+  <section class="section"><div class="wrap split">
+    <div><h2 class="rv">A custom environment for the way you live.</h2>
+      <p class="lead rv d1">Residential projects are developed with your designer, architect or reseller so the finished system suits the architecture, the animals or plants, and the way the space is used.</p>
+      <ul class="tags">{kinds.map((k) => <li>{k}</li>)}</ul></div>
+    <div class="photo reveal-img" style="aspect-ratio:4/5"><Photo src={photos.stand.src} alt={photos.stand.alt} sizes="(max-width:860px) 100vw,50vw" widths={[500, 800, 1100]} /></div>
+  </div></section>
+  <Band title="Begin with your space." lead="Your reseller or designer can bring us in, or you can start the conversation directly.">
+    <a class="btn solid" href="/contact/?type=project">Request a Consultation</a>
+  </Band>
+</Base>

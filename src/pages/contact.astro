@@ -1,0 +1,77 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+const paths = [
+  ['reseller', "I'm a Reseller", 'For dealers, retailers, designers, and contractors.'],
+  ['project', 'I Have a Project', 'For potential project inquiries.'],
+  ['support', 'I Need Technical Support', 'For existing customers and resellers.'],
+  ['reseller-apply', 'I Want to Become a Reseller', 'For new business relationships.'],
+];
+// field: [name, label, type, applies-to (space separated types), full width]
+const all = 'reseller project support reseller-apply';
+const fields: [string, string, string, string, boolean][] = [
+  ['name', 'Name', 'text', all, false], ['company', 'Company', 'text', 'reseller support reseller-apply project', false],
+  ['email', 'Email', 'email', all, false], ['phone', 'Phone', 'tel', all, false],
+  ['business', 'Type of Business', 'text', 'reseller-apply', false], ['website', 'Website', 'text', 'reseller-apply', false],
+  ['ptype', 'Project Type', 'select', 'reseller project', false], ['location', 'Location', 'text', 'reseller project reseller-apply', false],
+  ['dimensions', 'Approximate Dimensions', 'text', 'reseller project', false], ['budget', 'Estimated Budget', 'text', 'reseller project', false],
+  ['timeline', 'Timeline', 'text', 'reseller project', false], ['ref', 'Project / Order Reference', 'text', 'support', false],
+  ['message', 'Project Description', 'textarea', all, true],
+  ['drawings', 'Upload Drawings', 'file', 'reseller project support', false], ['photos', 'Upload Photos', 'file', 'reseller project support', false],
+];
+const projectTypes = ['Aquarium', 'Reef system', 'Freshwater / planted', 'Terrarium / vivarium', 'Paludarium', 'Water feature', 'Filtration / life support', 'Cabinet / stand', 'Other'];
+---
+<Base title="Contact — Start a Project or Become a Reseller" description="Contact our team to start a custom aquarium or terrarium project, apply to become a reseller, or request technical support.">
+  <section class="section" style="padding-top:11rem"><div class="wrap" style="max-width:62rem">
+    <span class="eyebrow">Contact</span><h1 style="font-size:clamp(2.6rem,6vw,4.8rem)">Let's Build Something Extraordinary</h1>
+    <p class="lead" style="margin-bottom:3rem">Choose the path that fits and tell us what you can. Dimensions, drawings and photos help, but are never required to start the conversation.</p>
+    <form id="cf" method="post" action={site.formEndpoint || undefined} enctype="multipart/form-data" novalidate>
+      <fieldset style="border:0;padding:0;margin:0"><legend class="sr">Inquiry type</legend>
+        <div class="paths">{paths.map(([v, t, d], i) => <label><input type="radio" name="inquiry" value={v} checked={i === 1} /><strong>{t}</strong><span>{d}</span></label>)}</div></fieldset>
+      <div class="fields">
+        {fields.map(([n, l, t, a, full]) => (
+          <div class={`field${full ? ' full' : ''}`} data-for={a}>
+            <label class="lbl" for={n}>{l}</label>
+            {t === 'textarea' ? <textarea id={n} name={n}></textarea>
+              : t === 'select' ? <select id={n} name={n}><option value="">Select…</option>{projectTypes.map((o) => <option>{o}</option>)}</select>
+              : <input id={n} name={n} type={t} multiple={t === 'file'} accept={t === 'file' ? '.pdf,.dwg,.dxf,.png,.jpg,.jpeg,.webp' : undefined} autocomplete={n === 'email' ? 'email' : n === 'name' ? 'name' : n === 'phone' ? 'tel' : undefined} />}
+          </div>
+        ))}
+        <div class="hp" aria-hidden="true"><label>Leave blank<input type="text" name="_gotcha" tabindex="-1" autocomplete="off" /></label></div>
+      </div>
+      <div class="btn-row"><button class="btn solid" type="submit">Send Inquiry</button></div>
+      <p class="notice" id="msg" role="status" hidden></p>
+    </form>
+    <dl class="facts" style="margin-top:5rem"><dt>Phone</dt><dd class="ph">{site.phone}</dd><dt>Email</dt><dd class="ph">{site.email}</dd><dt>Address</dt><dd class="ph">{site.address}</dd><dt>Service area</dt><dd class="ph">{site.serviceArea}</dd></dl>
+  </div></section>
+</Base>
+<script define:vars={{ endpoint: site.formEndpoint }}>
+  const form = document.getElementById('cf');
+  const msg = document.getElementById('msg');
+  const radios = form.querySelectorAll('input[name=inquiry]');
+  const fields = form.querySelectorAll('.field');
+  const set = (type) => {
+    fields.forEach((f) => {
+      const on = f.dataset.for.split(' ').includes(type);
+      f.hidden = !on;
+      f.querySelectorAll('input,select,textarea').forEach((i) => (i.disabled = !on));
+    });
+    radios.forEach((r) => (r.checked = r.value === type));
+  };
+  const q = new URLSearchParams(location.search).get('type');
+  set([...radios].some((r) => r.value === q) ? q : 'project');
+  radios.forEach((r) => r.addEventListener('change', () => set(r.value)));
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    msg.hidden = false;
+    const name = form.elements.name, email = form.elements.email;
+    if (!name.value.trim() || !/^\S+@\S+\.\S+$/.test(email.value)) { msg.textContent = 'Please provide your name and a valid email address.'; return; }
+    if (form.elements._gotcha.value) return;
+    if (!endpoint) { msg.textContent = 'This form is not yet connected to a service. Set formEndpoint in src/data/site.ts.'; return; }
+    try {
+      const res = await fetch(endpoint, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+      if (!res.ok) throw new Error();
+      form.reset(); set('project'); msg.textContent = 'Thank you. Our team will be in touch.';
+    } catch { msg.textContent = 'Something went wrong. Please try again or contact us directly.'; }
+  });
+</script>

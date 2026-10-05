@@ -1,0 +1,17 @@
+---
+import Photo from './Photo.astro';
+interface Props { eyebrow?: string; title: string; lead?: string; images: { src: ImageMetadata; alt: string }[]; short?: boolean; }
+const { eyebrow, title, lead, images, short } = Astro.props;
+---
+<section class={`hero${short ? ' short' : ''}`}>
+  <div class={`hero-bg${images.length === 1 ? ' single' : ''}`}>
+    {images.map((im, i) => <div class="slide"><Photo src={im.src} alt={i === 0 ? im.alt : im.alt} eager={i === 0} sizes="100vw" widths={[640, 1024, 1600, 2400]} /></div>)}
+  </div>
+  <div class="wrap">
+    {eyebrow && <p class="sub rv">{eyebrow}</p>}
+    <h1 class="rv d1">{title}</h1>
+    {lead && <p class="lead rv d2">{lead}</p>}
+    <div class="btn-row rv d3"><slot /></div>
+  </div>
+  {!short && <span class="scroll-cue" aria-hidden="true">Scroll</span>}
+</section>
